@@ -1,6 +1,7 @@
 import { Text, View, Image, TextInput, Pressable } from "react-native";
 import { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker';
+import Button from "~/src/components/Button";
 
 
 export default function CreatePost() {
@@ -8,7 +9,7 @@ export default function CreatePost() {
   const [image, setImage] = useState<string | null>(null);
 
   useEffect(() => {
-    if(!image) {
+    if (!image) {
       pickImage();
     }
   }, [image]);
@@ -31,33 +32,29 @@ export default function CreatePost() {
   return (
     <View className="p-3 items-center flex-1">
       {/* Image Picker */}
-      
+
       {image ? (<Image
-        source={{uri: image}}
+        source={{ uri: image }}
         className="w-52 aspect-[3/4] rounded-lg bg-slate-300"
       />) : (
-        <View className="w-52 aspect-[3/4] rounded-lg bg-slate-300"/>
+        <View className="w-52 aspect-[3/4] rounded-lg bg-slate-300" />
       )}
 
-        <Text onPress={pickImage} className="text-blue-500 font-semibold m-5">
-          Change
-        </Text>
+      <Text onPress={pickImage} className="text-blue-500 font-semibold m-5">
+        Change
+      </Text>
 
       {/* TextInput for caption */}
       <TextInput
-          value={caption}
-          onChangeText={(newValue) => setCaption(newValue)}
-          placeholder="What is on your mind"
-          className="w-full p-3"
+        value={caption}
+        onChangeText={(newValue) => setCaption(newValue)}
+        placeholder="What is on your mind"
+        className="w-full p-3"
       />
       {/* Button to submit post */}
-        <View className="mt-auto w-full">
-          <Pressable className="bg-blue-500 w-full p-3 items-center rounded-md">
-            <Text className="text-white font-semibold">
-              Post
-            </Text>
-          </Pressable>
-        </View>
+      <View className="mt-auto w-full">
+        <Button title="Share"/>
+      </View>
     </View>
   );
 }
